@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Collective 2026 closing event guests</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<style>
+:root{
+  --ink:#0d505a; --deep:#1e4d58; --green:#7ab942; --slate:#6f9096; --grey:#838383; --sage:#cad4d3; --paper:#ffffff; --soft:#eef2f1;
+  --bg:var(--paper); --fg:#000000; --muted:var(--grey); --line:#d9e0df; --panel:var(--soft); --accent:var(--ink); --ok:#4d7d22;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0a2e35; --fg:#ffffff; --muted:#a9bcbf; --line:#2a5a63; --panel:#1e4d58; --accent:#cad4d3; --ok:#7ab942;
+}}
+:root[data-theme="dark"]{ --bg:#0a2e35; --fg:#ffffff; --muted:#a9bcbf; --line:#2a5a63; --panel:#1e4d58; --accent:#cad4d3; --ok:#7ab942; }
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Montserrat,"Helvetica Neue",Arial,sans-serif;font-weight:400;line-height:1.5}
+.wrap{max-width:920px;margin:0 auto;padding:0 20px 64px}
+header{background:var(--sage);color:var(--ink);padding:44px 0 0}
+.hgrid{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:center;padding-bottom:32px}
+.badge{background:var(--ink);color:#fff;padding:22px 26px;text-align:center}
+.badge .col{font-weight:800;font-size:.72rem;letter-spacing:.42em;margin:0 0 10px;padding-left:.42em}
+.badge .nth{font-weight:900;font-size:3.2rem;line-height:.9;margin:0;color:var(--sage)}
+.badge .ann{font-weight:800;font-size:1.3rem;letter-spacing:.04em;margin:0;color:var(--sage)}
+h1 span{display:block}
+h1{font-weight:800;text-transform:uppercase;letter-spacing:.12em;font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.15;margin:0 0 10px;color:var(--ink)}
+.kicker{font-weight:600;color:var(--deep);font-size:.95rem;margin:0 0 4px}
+.lede{color:var(--deep);max-width:56ch;margin:0;font-weight:400}
+.navband{background:var(--ink)}
+.navband .wrap{padding-bottom:0}
+nav{display:flex;gap:4px;padding-top:10px}
+nav button{font:inherit;font-weight:700;font-size:.82rem;text-transform:uppercase;letter-spacing:.1em;border:0;background:transparent;color:var(--sage);padding:12px 18px;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--bg);color:var(--ink)}
+nav button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible{outline:3px solid var(--green);outline-offset:2px}
+@media (max-width:560px){.hgrid{grid-template-columns:1fr}.badge{justify-self:start;padding:16px 20px}.badge .nth{font-size:2.4rem}}
+main{padding-top:28px}
+.notice{background:var(--panel);border-left:4px solid var(--green);padding:12px 16px;border-radius:6px;margin:0 0 20px;font-size:.92rem}
+.notice.warn{border-left-color:#c58a00}
+label{display:block;font-weight:600;font-size:.9rem;margin:0 0 6px}
+input,select{font:inherit;width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+.search{position:relative;max-width:520px}
+.results{list-style:none;margin:6px 0 0;padding:0;border:1px solid var(--line);border-radius:8px;max-height:280px;overflow:auto;background:var(--bg)}
+.results li button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:12px;width:100%;padding:10px 14px;cursor:pointer}
+.results li button:hover,.results li button:focus-visible{background:var(--panel)}
+.results small{color:var(--muted)}
+.card{margin-top:24px;border:1px solid var(--line);border-top:6px solid var(--ink);border-radius:4px;padding:24px;max-width:620px}
+.who{font-weight:800;text-transform:uppercase;letter-spacing:.06em;font-size:1.5rem;line-height:1.15;margin:0;color:var(--accent)}
+.meta{color:var(--muted);margin:4px 0 20px;font-size:.92rem}
+.fields{display:grid;gap:14px;margin-bottom:20px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.btn{font:inherit;font-weight:600;border:0;border-radius:8px;padding:12px 20px;cursor:pointer;background:var(--ink);color:#fff}
+.btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--line)}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.status{font-size:.9rem;color:var(--ok)}
+.status.err{color:#c0392b}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.stat{background:var(--panel);border-radius:12px;padding:16px}
+.stat b{display:block;font-weight:800;color:var(--accent);font-size:2.2rem;line-height:1}
+.stat span{color:var(--muted);font-size:.85rem}
+.bar{height:6px;background:var(--line);border-radius:3px;margin-top:10px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--green)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+.tools input{flex:1 1 220px}
+.tools select{flex:0 1 200px}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.92rem}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;background:var(--ink);color:#fff;font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+tr:last-child td{border-bottom:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+th.num{text-align:right}
+.guests{margin:0;padding:0;list-style:none}
+.pending{color:var(--muted);font-style:italic}
+.pill{display:inline-block;font-size:.75rem;padding:2px 8px;border-radius:999px;background:var(--panel);color:var(--muted);margin-left:6px}
+tfoot td{font-weight:700;background:var(--panel)}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion: no-preference){ .card{animation:in .25s ease-out} @keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap hgrid">
+    <div class="badge" aria-label="Collective 5th annual">
+      <p class="col">COLLECTIVE</p>
+      <p class="nth">5TH</p>
+      <p class="ann">ANNUAL</p>
+    </div>
+    <div>
+      <p class="kicker">Nov 5 to 6, San José, Costa Rica</p>
+      <h1><span>Closing event</span> <span>guest list</span></h1>
+      <p class="lede">Agents can bring up to 3 guests. Everyone else can bring 1. Find your name and add who is coming with you.</p>
+    </div>
+  </div>
+  <div class="navband">
+    <div class="wrap">
+      <nav role="tablist">
+        <button role="tab" id="tab-form" aria-selected="true" aria-controls="view-form">Add my guests</button>
+        <button role="tab" id="tab-list" aria-selected="false" aria-controls="view-list">Full list</button>
+      </nav>
+    </div>
+  </div>
+</header>
+<main class="wrap">
+  <div id="dbNotice" class="notice warn" hidden></div>
+
+  <section id="view-form" role="tabpanel" aria-labelledby="tab-form">
+    <div class="search">
+      <label for="q">Your name</label>
+      <input id="q" type="search" placeholder="Start typing your name" autocomplete="off">
+      <ul class="results" id="results" hidden></ul>
+    </div>
+    <div id="card" class="card" hidden>
+      <p class="who" id="who"></p>
+      <p class="meta" id="meta"></p>
+      <div class="fields" id="fields"></div>
+      <div class="row">
+        <button class="btn" id="save">Save guests</button>
+        <button class="btn ghost" id="change">Choose another name</button>
+        <span class="status" id="status" role="status"></span>
+      </div>
+    </div>
+  </section>
+
+  <section id="view-list" role="tabpanel" aria-labelledby="tab-list" hidden>
+    <form id="login" class="card" style="margin-top:0" onsubmit="return false">
+      <p class="who">Admin sign in</p>
+      <p class="meta">The full guest list is only visible to the event admin.</p>
+      <div class="fields">
+        <div><label for="em">Email</label><input id="em" type="email" autocomplete="username"></div>
+        <div><label for="pw">Password</label><input id="pw" type="password" autocomplete="current-password"></div>
+      </div>
+      <div class="row"><button class="btn" id="signin" type="submit">Sign in</button><span class="status" id="lstatus" role="status"></span></div>
+    </form>
+    <div id="adminArea" hidden>
+    <div class="row" style="justify-content:flex-end;margin-bottom:12px"><button class="btn ghost" id="signout" type="button">Sign out</button></div>
+    <div class="stats" id="stats"></div>
+    <div class="tools">
+      <input id="filter" type="search" placeholder="Search host or guest">
+      <select id="show">
+        <option value="all">Everyone</option>
+        <option value="with">With guests</option>
+        <option value="without">No guests yet</option>
+        <option value="Agent">Agents only</option>
+        <option value="other">Non agents only</option>
+      </select>
+      <button class="btn" id="dl">Download CSV</button>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Host</th><th>Title</th><th>Guests</th><th class="num">Total people</th></tr></thead>
+        <tbody id="tbody"></tbody>
+        <tfoot><tr><td colspan="3" id="footLabel">Total</td><td class="num" id="footTotal"></td></tr></tfoot>
+      </table>
+    </div>
+    </div>
+  </section>
+</main>
+
+<script>
+const HOSTS = [{"id": "aldo-chirinos", "name": "Aldo Chirinos", "title": "Agent", "quota": 3}, {"id": "alejandra-murillo", "name": "Alejandra Murillo", "title": "Marketing", "quota": 1}, {"id": "alejandro-amador", "name": "Alejandro Amador", "title": "Agent", "quota": 3}, {"id": "alex-bejarano", "name": "Alex Bejarano", "title": "Agent", "quota": 3}, {"id": "alexandra-vargas", "name": "Alexandra Vargas", "title": "Agent", "quota": 3}, {"id": "alvaro-azofeifa", "name": "Alvaro Azofeifa", "title": "Agent", "quota": 3}, {"id": "alvaro-ortiz", "name": "Alvaro Ortiz", "title": "Agent", "quota": 3}, {"id": "ana-contreras", "name": "Ana Contreras", "title": "Agent", "quota": 3}, {"id": "andrea-bissinger", "name": "Andrea Bissinger", "title": "Agent", "quota": 3}, {"id": "andrea-ramirez", "name": "Andrea Ramirez", "title": "Agent", "quota": 3}, {"id": "andres-murillo", "name": "Andres Murillo", "title": "Agent", "quota": 3}, {"id": "brad-shaw", "name": "Brad Shaw", "title": "Agent", "quota": 3}, {"id": "chris-norris", "name": "Chris Norris", "title": "Agent", "quota": 3}, {"id": "cynthia-urena", "name": "Cynthia Ureña", "title": "Agent", "quota": 3}, {"id": "diana-gonzalez", "name": "Diana González", "title": "Admin", "quota": 1}, {"id": "dopper-huckel", "name": "Dopper Huckel", "title": "Agent", "quota": 3}, {"id": "ewen-dusch", "name": "Ewen Dusch", "title": "Agent", "quota": 3}, {"id": "fabiana-vargas", "name": "Fabiana Vargas", "title": "Agent", "quota": 3}, {"id": "felipe-pozuelo", "name": "Felipe Pozuelo", "title": "Agent", "quota": 3}, {"id": "gabriela-isturiz", "name": "Gabriela Isturiz", "title": "Marketing", "quota": 1}, {"id": "gene-harris", "name": "Gene Harris", "title": "Agent", "quota": 3}, {"id": "ignacio-velazquez", "name": "Ignacio Velazquez", "title": "Admin", "quota": 1}, {"id": "ingrid-ortiz", "name": "Ingrid Ortiz", "title": "Agent", "quota": 3}, {"id": "jen-harter", "name": "Jen Harter", "title": "Agent", "quota": 3}, {"id": "john-williamson", "name": "John Williamson", "title": "Agent", "quota": 3}, {"id": "jorge-fernandez", "name": "Jorge Fernández", "title": "Agent", "quota": 3}, {"id": "josie-green", "name": "Josie Green", "title": "Agent", "quota": 3}, {"id": "juan-carlos-peralta", "name": "Juan Carlos Peralta", "title": "Agent", "quota": 3}, {"id": "katherine-apsey", "name": "Katherine Apsey", "title": "Agent", "quota": 3}, {"id": "katherine-espinosa", "name": "Katherine Espinosa", "title": "Admin", "quota": 1}, {"id": "kelli-ricco", "name": "Kelli Ricco", "title": "Agent", "quota": 3}, {"id": "kimberly-leon", "name": "Kimberly León", "title": "Marketing", "quota": 1}, {"id": "laura-duran", "name": "Laura Durán", "title": "Marketing", "quota": 1}, {"id": "leonardo-santamaria", "name": "Leonardo Santamaría", "title": "Marketing", "quota": 1}, {"id": "lineth-solano", "name": "Lineth Solano", "title": "Agent", "quota": 3}, {"id": "maria-jimenez-bakit", "name": "María Jiménez-Bákit", "title": "Agent", "quota": 3}, {"id": "mariel-gracia", "name": "Mariel Gracia", "title": "Agent", "quota": 3}, {"id": "matt-hogan", "name": "Matt Hogan", "title": "Agent", "quota": 3}, {"id": "matthew-mcpherson", "name": "Matthew McPherson", "title": "Agent", "quota": 3}, {"id": "molly-dillworth", "name": "Molly Dillworth", "title": "Agent", "quota": 3}, {"id": "monica-carvajal", "name": "Monica Carvajal", "title": "Admin", "quota": 1}, {"id": "nataliya-bari", "name": "Nataliya Bari", "title": "Agent", "quota": 3}, {"id": "nathalia-romero", "name": "Nathalia Romero", "title": "Marketing", "quota": 1}, {"id": "pablo-cardoza", "name": "Pablo Cardoza", "title": "Agent", "quota": 3}, {"id": "paola-mora", "name": "Paola Mora", "title": "Marketing", "quota": 1}, {"id": "priscilla-lara", "name": "Priscilla Lara", "title": "Agent", "quota": 3}, {"id": "priscilla-moreno", "name": "Priscilla Moreno", "title": "Admin", "quota": 1}, {"id": "rachel-candib", "name": "Rachel Candib", "title": "Agent", "quota": 3}, {"id": "sander-werink", "name": "Sander Werink", "title": "Agent", "quota": 3}, {"id": "sara-gomez", "name": "Sara Gomez", "title": "Agent", "quota": 3}, {"id": "sarah-williams", "name": "Sarah Williams", "title": "Agent", "quota": 3}, {"id": "scott-cutter", "name": "Scott Cutter", "title": "Agent", "quota": 3}, {"id": "scott-williams", "name": "Scott Williams", "title": "Agent", "quota": 3}, {"id": "tara-shaw", "name": "Tara Shaw", "title": "Agent", "quota": 3}, {"id": "theo-veenstra", "name": "Theo Veenstra", "title": "Agent", "quota": 3}, {"id": "todd-cutter", "name": "Todd Cutter", "title": "Agent", "quota": 3}, {"id": "vitaly-balasanov", "name": "Vitaly Balasanov", "title": "Agent", "quota": 3}, {"id": "beau-southwell", "name": "Beau Southwell", "title": "Agent", "quota": 3}, {"id": "juan-pinto", "name": "Juan Pinto", "title": "Agent", "quota": 3}, {"id": "melanie-mccallister", "name": "Melanie McCallister", "title": "Agent", "quota": 3}, {"id": "jeff-mays", "name": "Jeff Mays", "title": "Tom Ferry", "quota": 1}, {"id": "ross-buck", "name": "Ross Buck", "title": "OMNI MLS", "quota": 1}, {"id": "alberto-saenz", "name": "Alberto Sáenz", "title": "INVICTA", "quota": 1}, {"id": "jorge-gonzalez", "name": "Jorge González", "title": "INVICTA", "quota": 1}, {"id": "juvenal-sanchez", "name": "Juvenal Sánchez", "title": "INVICTA", "quota": 1}, {"id": "maximiliano-barr", "name": "Maximiliano Barr", "title": "TLA", "quota": 1}, {"id": "frank-busch", "name": "Frank Busch", "title": "TLA", "quota": 1}, {"id": "valeria-aguiluz", "name": "Valeria Aguiluz", "title": "TLA", "quota": 1}, {"id": "gabriela-quevedo", "name": "Gabriela Quevedo", "title": "SECOND STREET", "quota": 1}, {"id": "steve-sluyter", "name": "Steve Sluyter", "title": "SECOND STREET", "quota": 1}, {"id": "tina-wallace", "name": "Tina Wallace", "title": "Concierge Auctions", "quota": 1}, {"id": "danny-pell", "name": "Danny Pell", "title": "Concierge Auctions", "quota": 1}];
+const byId = Object.fromEntries(HOSTS.map(h => [h.id, h]));
+let entries = {};       // hostId -> [guest names]
+let db = null, canWrite = true, current = null;
+
+const $ = id => document.getElementById(id);
+const norm = s => (s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const guestsOf = id => (entries[id] || []).filter(g => g && g.trim());
+
+/* tabs */
+function showTab(which){
+  const form = which === "form";
+  $("tab-form").setAttribute("aria-selected", form); $("tab-list").setAttribute("aria-selected", !form);
+  $("view-form").hidden = !form; $("view-list").hidden = form;
+  if(!form) renderList();
+}
+$("tab-form").onclick = () => showTab("form");
+$("tab-list").onclick = () => showTab("list");
+
+/* search */
+$("q").addEventListener("input", () => {
+  const q = norm($("q").value.trim());
+  const ul = $("results"); ul.innerHTML = "";
+  if(!q){ ul.hidden = true; return; }
+  const hits = HOSTS.filter(h => norm(h.name).includes(q)).slice(0, 12);
+  if(!hits.length){ ul.innerHTML = '<li style="padding:10px 14px" class="pending">No one on the list matches that name. Check the spelling or ask Marketing.</li>'; ul.hidden=false; return; }
+  for(const h of hits){
+    const li = document.createElement("li"), b = document.createElement("button");
+    b.type = "button";
+    const n = document.createElement("span"); n.textContent = h.name;
+    const s = document.createElement("small"); s.textContent = h.title;
+    b.append(n, s); b.onclick = () => pick(h.id);
+    li.append(b); ul.append(li);
+  }
+  ul.hidden = false;
+});
+
+function pick(id){
+  current = byId[id];
+  $("results").hidden = true; $("q").value = current.name;
+  $("who").textContent = current.name;
+  $("meta").textContent = `${current.title}. You can bring ${current.quota} guest${current.quota>1?"s":""}.`;
+  const box = $("fields"); box.innerHTML = "";
+  const note = $("status"); note.className="status"; note.textContent="";
+  if(db){ db.rpc("guest_count",{p_host_id:id}).then(({data}) => { if(current && current.id===id && data>0){ note.textContent = `You already registered ${data} guest${data>1?"s":""}. Saving again replaces them.`; } }); }
+  for(let i=0;i<current.quota;i++){
+    const wrap = document.createElement("div");
+    const l = document.createElement("label"); l.htmlFor = "g"+i; l.textContent = current.quota>1 ? `Guest ${i+1} full name` : "Guest full name";
+    const inp = document.createElement("input"); inp.id = "g"+i; inp.maxLength = 80; 
+    inp.placeholder = "First and last name";
+    wrap.append(l, inp); box.append(wrap);
+  }
+  $("save").disabled = !canWrite;
+  $("card").hidden = false;
+  $("g0")?.focus();
+}
+$("change").onclick = () => { $("card").hidden = true; current = null; $("q").value = ""; $("q").focus(); };
+
+$("save").onclick = async () => {
+  if(!current) return;
+  const names = [...$("fields").querySelectorAll("input")].map(i => i.value.trim().replace(/\s+/g," "));
+  const st = $("status");
+  if(!db){ st.className="status err"; st.textContent = "Can't connect to the guest list right now. Reload the page and try again."; return; }
+  $("save").disabled = true; st.className="status"; st.textContent = "Saving...";
+  try{
+    const { error } = await db.rpc("save_guests", { p_host_id: current.id, p_host_name: current.name, p_guests: names });
+    if(error) throw error;
+    const n = names.filter(Boolean).length;
+    st.textContent = n ? `Saved. ${n} guest${n>1?"s":""} registered for ${current.name}.` : `Saved. No guests registered for ${current.name}.`;
+  }catch(e){
+    st.className = "status err";
+    st.textContent = "Guests were not saved. Try again or contact Marketing.";
+  }finally{ $("save").disabled = !canWrite; }
+};
+
+/* list */
+function rows(){
+  const q = norm($("filter").value.trim()), show = $("show").value;
+  return HOSTS.filter(h => {
+    const g = guestsOf(h.id);
+    if(show==="with" && !g.length) return false;
+    if(show==="without" && g.length) return false;
+    if(show==="Agent" && h.title!=="Agent") return false;
+    if(show==="other" && h.title==="Agent") return false;
+    if(q && !norm(h.name).includes(q) && !g.some(x => norm(x).includes(q))) return false;
+    return true;
+  }).sort((a,b)=>a.name.localeCompare(b.name));
+}
+function renderStats(){
+  const hosts = HOSTS.length, maxG = HOSTS.reduce((s,h)=>s+h.quota,0);
+  const guests = HOSTS.reduce((s,h)=>s+guestsOf(h.id).length,0);
+  const filled = HOSTS.filter(h=>guestsOf(h.id).length).length;
+  const pct = Math.round(guests/maxG*100);
+  $("stats").innerHTML = "";
+  const add = (big, small, bar) => { const d=document.createElement("div"); d.className="stat"; d.innerHTML=`<b></b><span></span>${bar!=null?`<div class="bar"><i style="width:${bar}%"></i></div>`:""}`; d.querySelector("b").textContent=big; d.querySelector("span").textContent=small; $("stats").append(d); };
+  add(hosts + guests, `Total people (hosts plus guests), of ${hosts+maxG} max`);
+  add(guests, `Guests registered, of ${maxG} available`, pct);
+  add(`${filled}/${hosts}`, "Hosts who added guests");
+}
+function renderList(){
+  renderStats();
+  const tb = $("tbody"); tb.innerHTML = "";
+  const list = rows(); let total = 0;
+  for(const h of list){
+    const g = guestsOf(h.id), t = 1 + g.length; total += t;
+    const tr = document.createElement("tr");
+    const td1 = document.createElement("td"); td1.textContent = h.name;
+    const td2 = document.createElement("td"); td2.textContent = h.title;
+    const td3 = document.createElement("td");
+    if(g.length){ const ul=document.createElement("ul"); ul.className="guests"; g.forEach(x=>{const li=document.createElement("li"); li.textContent=x; ul.append(li);}); td3.append(ul); }
+    else { const s=document.createElement("span"); s.className="pending"; s.textContent="No guests yet"; td3.append(s); }
+    const pill=document.createElement("span"); pill.className="pill"; pill.textContent=`${g.length}/${h.quota}`; td3.append(pill);
+    const td4 = document.createElement("td"); td4.className="num"; td4.textContent = t;
+    tr.append(td1,td2,td3,td4); tb.append(tr);
+  }
+  $("footLabel").textContent = `Total for ${list.length} host${list.length===1?"":"s"} shown`;
+  $("footTotal").textContent = total;
+}
+$("filter").oninput = renderList; $("show").onchange = renderList;
+
+/* csv */
+$("dl").onclick = async () => {
+  const esc = v => `"${String(v??"").replace(/"/g,'""')}"`;
+  const lines = [["Host","Title","Guests allowed","Guest 1","Guest 2","Guest 3","Guests registered","Total people"].map(esc).join(",")];
+  let tp = 0, tg = 0;
+  for(const h of rows()){
+    const g = guestsOf(h.id); tp += 1+g.length; tg += g.length;
+    lines.push([h.name,h.title,h.quota,g[0]||"",g[1]||"",g[2]||"",g.length,1+g.length].map(esc).join(","));
+  }
+  lines.push(["TOTAL","","","","","",tg,tp].map(esc).join(","));
+  const csv = "\ufeff" + lines.join("\r\n");
+  const filename = "collective-2026-closing-event-guests.csv";
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download=filename; document.body.append(a); a.click(); a.remove();
+};
+
+/* data */
+const SUPABASE_URL = "https://ebwvyikrxgjpjpzccbts.supabase.co";
+const SUPABASE_KEY = "sb_publishable_b0KHTa_LCWZk-ICELSAN8A_dSQ_JQ5R";
+async function load(){
+  if(!db || !admin) return;
+  const { data, error } = await db.from("closing_guests").select("host_id,guests");
+  if(error){ const n=$("dbNotice"); n.hidden=false; n.textContent="The guest list could not load. Reload the page in a minute."; return; }
+  const next = {};
+  (data||[]).forEach(r => { if(byId[r.host_id] && Array.isArray(r.guests)) next[r.host_id] = r.guests.slice(0, byId[r.host_id].quota).map(String); });
+  entries = next; $("dbNotice").hidden = true;
+  if(!$("view-list").hidden) renderList();
+}
+let admin = false;
+function setAdmin(on){
+  admin = on; $("login").hidden = on; $("adminArea").hidden = !on;
+  if(on) load(); else { entries = {}; }
+}
+const isAdminLink = new URLSearchParams(location.search).has("admin");
+if(!isAdminLink) $("tab-list").hidden = true;
+try{ db = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); }catch(e){ db = null; }
+if(!db){ const n=$("dbNotice"); n.hidden=false; n.textContent="Can't connect to the guest list right now. Reload the page."; }
+if(db && isAdminLink){
+  db.auth.getSession().then(({data}) => setAdmin(!!data.session));
+  $("signin").onclick = async () => {
+    const st=$("lstatus"); st.className="status"; st.textContent="Signing in...";
+    const { error } = await db.auth.signInWithPassword({ email: $("em").value.trim(), password: $("pw").value });
+    if(error){ st.className="status err"; st.textContent="Email or password is incorrect."; return; }
+    st.textContent=""; $("pw").value=""; setAdmin(true);
+  };
+  $("signout").onclick = async () => { await db.auth.signOut(); setAdmin(false); };
+  $("tab-list").addEventListener("click", load);
+  setInterval(() => { if(admin && !$("view-list").hidden) load(); }, 30000);
+}
+</script>
+</body>
+</html>
